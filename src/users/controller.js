@@ -26,7 +26,7 @@ const addUsers = (req,res)=>{
     // add user to database
     client.query(queries.addUsers,[name,email,age,dob],(error,results)=>{
         if(error) throw error;
-        res.status(201).send("user added successfully")
+        res.status(200).json("user added successfully")
     })     
     })
 }
