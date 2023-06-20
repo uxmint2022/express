@@ -11,7 +11,7 @@ const getUsers =(req,res)=>{
 const getUsersById =(req,res)=>{
     const id = parseInt(req.params.id)
     client.query(queries.getUsersById,[id],(error,results)=>{
-    if(error) throw error;
+    if(error) throw error.message;
     res.status(200).json(results.rows)
     })
 }
@@ -25,7 +25,7 @@ const addUsers = (req,res)=>{
         };
     // add user to database
     client.query(queries.addUsers,[name,email,age,dob],(error,results)=>{
-        if(error) throw error;
+        if(error) throw error.message;
         res.status(200).json("user added successfully")
     })     
     })
@@ -40,8 +40,8 @@ const removeUsers = (req,res)=>{
         }
 
     client.query(queries.removeUser,[id],(error,results)=>{
-        if(error) throw error;
-        res.status(200).send('user removed successful')
+        if(error) throw error.message;
+        res.status(200).json('user removed successful')
     })    
     })
 }
@@ -57,8 +57,8 @@ const updateUsers = (req,res)=>{
     
      client.query(queries.updateUsers,[name,email,age,dob,id],(error,results)=>{
     // client.query(queries.updateUsers,[name,id],(error,results)=>{
-        if(error) throw error;
-        else if (res.status(200).send('user update successful'));
+        if(error) throw error.message;
+        else if (res.status(200).json('user update successful'));
     })
     })
 }
